@@ -1,7 +1,7 @@
 #advent of Code Day 1 : Calorie Counting
 
 ##read in elfCalories.txt and create dataframe
-Elffile <- readLines("elfCalories.txt", skipNul = FALSE)
+Elffile <- readLines("Day1/elfCalories.txt", skipNul = FALSE)
 dfmain<- data.frame(matrix(ncol = 2, nrow = 0))
 colnames(dfmain) <- c("elf", "calories")
 #iterate through lines in elfCalories.txt and sum values held by each elf
@@ -24,3 +24,14 @@ for(ln in Elffile){
 
 #finds the max value under column 'calories'
 print(paste("the Elf with the most calories is holding",dfmain[which.max(dfmain$calories), 2],"calories!"))
+
+#PART 2 
+#find sum of top 3 elf calories!
+#create new identifcal data frame and remove rows of highest calorie count
+top3 <- 0
+df2 <- dfmain
+for(i in 1:3){
+  top3 <- top3 + df2[which.max(df2$calories), 2]
+  df2 <- df2[-(which.max(df2$calories)),]
+}
+print(paste("the Elves with the top 3 calorie loads are carrying",top3,"calories!"))
